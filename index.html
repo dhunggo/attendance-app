@@ -139,7 +139,7 @@
      * [설정] 선생님의 구글 앱스 스크립트 웹앱 URL을 아래에 정확히 입력하세요.
      * 배포 후 생성된 주소(https://script.google.com/.../exec)를 따옴표 안에 넣으시면 됩니다.
      */
-    const API_URL = "https://script.google.com/macros/s/AKfycbz7x7icAu-0IZ9Xr3v7Tjqp0bedzSxVJLIViFO0S66Z05Sk7bvY03RFgwEJFYfuB1EO/exec"; 
+    const API_URL = "https://script.google.com/macros/s/AKfycbxUbRSeU7788ljN-UMH0GLN27soejhpqoY0slA8zQvEOoxix-KiloyFyzvmCutexfEp/exec"; 
 
     let allStudents = [];
     let classroomData = {}; 
@@ -187,7 +187,7 @@
         });
 
         // 교시 세팅
-        const periods = [1,2,3,4,5,6,7,8];
+        const periods = [1,2,3,4,5,6,7,8,9,10,11,12];
         const periodSelect = document.getElementById('period-select');
         periods.forEach(p => {
             let opt = document.createElement('option');
@@ -260,12 +260,14 @@
             btn.innerHTML = `<span class="font-bold">${s.seat}번 ${s.name || '(빈자리)'}</span><span class="text-[10px] opacity-70">${s.status}</span>`;
             
             if(s.name) {
-                btn.onclick = () => {
-                    const cycle = ["자습", "수업", "수업불참", "자리비움"];
-                    let idx = cycle.indexOf(s.status);
-                    s.status = cycle[(idx + 1) % cycle.length];
-                    renderAll();
-                };
+    btn.onclick = () => {
+    const cycle = ["자습", "수업", "수업불참", "자리비움"];
+    let idx = cycle.indexOf(s.status);
+    s.status = cycle[(idx + 1) % cycle.length];
+
+    renderMap();
+    renderList();
+};
             } else {
                 btn.style.opacity = "0.3";
                 btn.style.pointerEvents = "none";
